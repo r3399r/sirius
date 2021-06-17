@@ -1,7 +1,7 @@
 {
     "name": "sirius",
     "version": "0.1.0",
-    "author": "Alethea",
+    "author": "Alethea & Yue Chang",
     "private": true,
     "scripts": {
         "start": "cross-env BROWSER=none PORT=3000 react-scripts start",
