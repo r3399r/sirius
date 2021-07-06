@@ -9,9 +9,10 @@ const route = {
 const AppRoutes = () => {
   return (
     <Switch>
-      <Route exact={true} path="/" component={route.Home} />
+      <Route exact={true} path="/home" component={route.Home} />
       <Route exact={true} path="/new-record" component={route.NewRecord} />
-      <Redirect to="/" />
+      {/* 上面的Route都不符合才到下面的Redirect */}
+      <Redirect to="/home" />
     </Switch>
   );
 };
