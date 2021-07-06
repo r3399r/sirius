@@ -11,33 +11,17 @@ const steps = ['type', 'player', 'role', 'night', 'daytime'];
 const NewRecord = () => {
   const [step, setStep] = useState<string>(steps[0]); // 同時宣告step(值) setStep(function)
 
-  const onTypeSubmit = () => {
-    setStep(steps[1]);
-  };
-
-  const onPlayerSubmit = () => {
-    setStep(steps[2]);
-  };
-
-  const onRoleSubmit = () => {
-    setStep(steps[3]);
-  };
-
-  const onNightSubmit = () => {
-    setStep(steps[4]);
-  };
-
-  const onDaytimeSubmit = () => {
-    setStep(steps[5]);
+  const onSubmit = (i: number) => () => {
+    setStep(steps[i]);
   };
 
   return (
     <div className={style.self}>
-      {step === steps[0] && <Type onClick={onTypeSubmit} />}
-      {step === steps[1] && <Player onClick={onPlayerSubmit} />}
-      {step === steps[2] && <Role onClick={onRoleSubmit} />}
-      {step === steps[3] && <Night onClick={onNightSubmit} />}
-      {step === steps[4] && <Daytime onClick={onDaytimeSubmit} />}
+      {step === steps[0] && <Type onClick={onSubmit(1)} />}
+      {step === steps[1] && <Player onClick={onSubmit(2)} />}
+      {step === steps[2] && <Role onClick={onSubmit(3)} />}
+      {step === steps[3] && <Night onClick={onSubmit(4)} />}
+      {step === steps[4] && <Daytime onClick={onSubmit(5)} />}
     </div>
   );
 };
