@@ -6,3 +6,6 @@
 
 # build
 /build
+
+# OS file
+**/.DS_Store 
