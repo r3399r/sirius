@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import style from './Type.module.scss';
 
-const types = ['狼王守衛', '守墓人石像鬼', '狼美人騎士', '機械狼'];
+const types = ['狼王守衛', '守墓人石像鬼', '狼美人騎士', '機械狼', '狼王魔術師'];
 
 type Props = {
   onClick: () => void;
