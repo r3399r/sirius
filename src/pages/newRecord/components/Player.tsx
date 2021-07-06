@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-import style from './Player.module.scss';
 
 const players = [
   '玩家1',

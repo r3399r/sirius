@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-import style from './Role.module.scss';
 
 const role = [
   '玩家1',
