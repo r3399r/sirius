@@ -32,9 +32,7 @@ const Night = ({ onClick }: Props) => {
       </div>
 
       <div className={style.btn}>
-        <Button type="text" className={style.botton} onClick={onClick}>
-          Submit
-        </Button>
+        <Button onClick={onClick}>Submit</Button>
       </div>
     </div>
   );
