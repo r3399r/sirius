@@ -1,0 +1,85 @@
+.title {
+  font-size: 40px;
+  margin-left: 30px;
+  margin-top: 20px;
+}
+
+.main_frame {
+  width: 70%;
+  margin: 0 auto;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.header {
+  background-color: rgb(255, 209, 216);
+  font-size: 25px;
+  height: 190px;
+  width: 200px;
+  margin-top: 100px;
+  margin-left: 60px;
+  padding: 80px 70px;
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.function_frame {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 25px;
+}
+
+.function {
+  background-color: rgb(255, 209, 216);
+  font-size: 25px;
+  height: 100px;
+  margin-top: 10px;
+  padding: 30px 50px;
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.num_frame {
+  margin-top: 10px;
+  margin-left: 100px;
+  width: 550px;
+  gap: 25px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.num {
+  padding: 40px;
+  border-radius: 20px;
+  font-size: 25px;
+  background-color: #d3f3ff;
+  width: 110px;
+  cursor: pointer;
+  text-align: center;
+}
+
+.null {
+  padding: 40px 75px;
+  border-radius: 20px;
+  font-size: 25px;
+  width: 250px;
+  background-color: #d3f3ff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.btn {
+  float: right;
+  > button {
+    font-size: 20px;
+    color: black;
+    border-radius: 12px;
+    padding: 12px 25px;
+    margin-right: 100px;
+    height: auto;
+    background-color: rgb(255, 230, 132);
+    border-color: rgb(255, 230, 132);
+  }
+}
