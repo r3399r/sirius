@@ -4,11 +4,11 @@
   margin-top: 20px;
 }
 
-.main_frame {
-  width: 70%;
-  margin: 0 auto;
+.mainFrame {
+  width: 100%;
   display: flex;
   flex-wrap: wrap;
+  justify-content: space-around;
 }
 
 .header {
@@ -24,7 +24,7 @@
   text-align: center;
 }
 
-.function_frame {
+.functionFrame {
   display: flex;
   flex-wrap: wrap;
   gap: 25px;
@@ -41,7 +41,7 @@
   text-align: center;
 }
 
-.num_frame {
+.numFrame {
   margin-top: 10px;
   margin-left: 100px;
   width: 550px;
@@ -72,14 +72,12 @@
 
 .btn {
   float: right;
-  > button {
-    font-size: 20px;
-    color: black;
-    border-radius: 12px;
-    padding: 12px 25px;
-    margin-right: 100px;
-    height: auto;
-    background-color: rgb(255, 230, 132);
-    border-color: rgb(255, 230, 132);
-  }
+  font-size: 20px;
+  color: black;
+  border-radius: 12px;
+  padding: 12px 25px;
+  margin-right: 100px;
+  height: auto;
+  background-color: rgb(255, 230, 132);
+  border-color: rgb(255, 230, 132);
 }

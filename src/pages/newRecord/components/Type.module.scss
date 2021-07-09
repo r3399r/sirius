@@ -10,33 +10,28 @@
   border-radius: 10px;
   padding: 20px;
   width: 70%;
-  //background-color: #fff7e1;
   display: flex;
   gap: 40px;
   flex-wrap: wrap;
-  //justify-content: space-around;
 }
 
 .type {
   border-radius: 8px;
   padding: 20px;
   width: 160px;
-  display: flex;
-  justify-content: center;
+  text-align: center;
   background-color: #d3f3ff;
   cursor: pointer;
 }
 
 .btn {
   float: right;
-  > button {
-    font-size: 20px;
-    color: black;
-    border-radius: 12px;
-    padding: 12px 25px;
-    margin-right: 100px;
-    height: auto;
-    background-color: rgb(255, 230, 132);
-    border-color: rgb(255, 230, 132);
-  }
+  font-size: 20px;
+  color: black;
+  border-radius: 12px;
+  padding: 12px 25px;
+  margin-right: 100px;
+  height: auto;
+  background-color: rgb(255, 230, 132);
+  border-color: rgb(255, 230, 132);
 }

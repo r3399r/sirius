@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-import { count } from 'console';
 import style from './Player.module.scss';
 
 const players = [
@@ -29,12 +28,8 @@ const Player = ({ onClick }: Props) => {
         {players.map((v: string, i: number) => {
           return (
             <div className={style.child} key={i}>
-              <div className={style.text} key={i}>
-                {v}
-              </div>
-              <div className={style.fill_block} key={i}>
-                1
-              </div>
+              <div className={style.text}>{v}</div>
+              <div className={style.fillBlock}>1</div>
             </div>
           );
         })}

@@ -11,15 +11,15 @@ const Night = ({ onClick }: Props) => {
   return (
     <div>
       <div className={style.title}>首夜</div>
-      <div className={style.main_frame}>
+      <div className={style.mainFrame}>
         <div>
           <div className={style.header}>女巫</div>
-          <div className={style.function_frame}>
+          <div className={style.functionFrame}>
             <div className={style.function}>解救</div>
             <div className={style.function}>撒毒</div>
           </div>
         </div>
-        <div className={style.num_frame}>
+        <div className={style.numFrame}>
           {daytime.map((v: string, i: number) => {
             return (
               <div className={style.num} key={i}>

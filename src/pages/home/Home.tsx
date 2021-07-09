@@ -11,10 +11,10 @@ const Home = () => {
 
   return (
     <div className={style.btn}>
-      <Button type="text" className={style.button_left} onClick={onClick('new-record')}>
+      <Button type="text" className={style.buttonLeft} onClick={onClick('new-record')}>
         建立新記錄
       </Button>
-      <Button className={style.button_right} disabled={true}>
+      <Button className={style.buttonRight} disabled={true}>
         復盤記錄
       </Button>
     </div>

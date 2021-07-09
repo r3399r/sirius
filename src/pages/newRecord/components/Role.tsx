@@ -1,8 +1,6 @@
 import { Button } from 'antd';
 import style from './Role.module.scss';
 
-const num = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12];
-
 const role = ['Alex', 'Bai', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'Kevin', 'Lily'];
 
 type Props = {
@@ -17,15 +15,9 @@ const Role = ({ onClick }: Props) => {
         {role.map((v: string, i: number) => {
           return (
             <div className={style.child} key={i}>
-              <div className={style.number} key={i}>
-                {num[i]}
-              </div>
-              <div className={style.text} key={i}>
-                {v}
-              </div>
-              <div className={style.fill_block} key={i}>
-                1
-              </div>
+              <div className={style.number}>{i + 1}</div>
+              <div className={style.text}>{v}</div>
+              <div className={style.fillBlock}>1</div>
             </div>
           );
         })}
