@@ -1,7 +1,15 @@
 import { Button } from 'antd';
 import style from './Type.module.scss';
 
-const types = ['狼王守衛', '守墓人石像鬼', '狼美人騎士', '機械狼', '狼王魔術師'];
+const types = [
+  '狼王守衛',
+  '守墓人石像鬼',
+  '狼美人騎士',
+  '機械狼',
+  '狼王魔術師',
+  '預女獵白',
+  '噩夢之影',
+];
 
 type Props = {
   onClick: () => void;
@@ -20,8 +28,8 @@ const Type = ({ onClick }: Props) => {
           );
         })}
       </div>
-      <div className={style.btn}>
-        <Button type="primary" onClick={onClick}>
+      <div>
+        <Button type="text" className={style.btn} onClick={onClick}>
           Submit
         </Button>
       </div>

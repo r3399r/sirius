@@ -1,3 +1,22 @@
-.main {
-  padding: 20px;
+.btn {
+  padding: 40px;
+  display: flex;
+  justify-content: center;
+  gap: 30px;
+}
+
+.buttonLeft {
+  font-size: 20px;
+  color: black;
+  background-color: #d3f3ff;
+  height: 80px;
+  border-radius: 15px;
+}
+
+.buttonRight {
+  font-size: 20px;
+  color: gray;
+  border-color: gray;
+  height: 80px;
+  border-radius: 15px;
 }

@@ -4,24 +4,32 @@
   margin-top: 20px;
 }
 
-.panel {
-  font-size: 20px;
-  margin: 10px auto;
-  border-radius: 10px;
-  padding: 20px;
-  width: 70%;
+.parent {
+  width: 50%;
   display: flex;
-  gap: 40px;
   flex-wrap: wrap;
+  margin: 0 auto;
 }
 
-.type {
-  border-radius: 8px;
-  padding: 20px;
-  width: 160px;
-  text-align: center;
-  background-color: #d3f3ff;
-  cursor: pointer;
+.child {
+  font-size: 20px;
+  margin: 10px;
+  display: flex;
+  width: 250px;
+}
+
+.number {
+  width: 40px;
+}
+
+.text {
+  width: 35%;
+}
+
+.fillBlock {
+  border-radius: 5px;
+  background-color: lightgray;
+  width: 35%;
 }
 
 .btn {
