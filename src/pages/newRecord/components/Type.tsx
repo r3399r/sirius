@@ -1,4 +1,6 @@
 import { Button } from 'antd';
+import classNames from 'classnames';
+import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { setType } from 'src/redux/recordSlice';
 import style from './Type.module.scss';
@@ -19,26 +21,36 @@ type Props = {
 
 const Type = ({ onClick }: Props) => {
   const dispatch = useDispatch();
+  const [whichIsClicked, setWhichIsClicked] = useState<number>(-1);
 
-  const demoClick = () => {
-    dispatch(setType(Date.now().toString()));
+  const onTypeClick = (i: number) => () => {
+    setWhichIsClicked(i);
+  };
+
+  const onSubmit = () => {
+    dispatch(setType(types[whichIsClicked]));
+    onClick();
   };
 
   return (
     <div>
       <div className={style.title}>選擇版型</div>
-      <button onClick={demoClick}>Demo Redux</button>
       <div className={style.panel}>
         {types.map((v: string, i: number) => {
           return (
-            <div key={i} className={style.type}>
+            <div
+              key={i}
+              className={classNames(style.type, { [style.clicked]: i === whichIsClicked })}
+              role="button"
+              onClick={onTypeClick(i)}
+            >
               {v}
             </div>
           );
         })}
       </div>
       <div>
-        <Button type="text" className={style.btn} onClick={onClick}>
+        <Button type="text" className={style.btn} onClick={onSubmit} disabled={whichIsClicked < 0}>
           Submit
         </Button>
       </div>

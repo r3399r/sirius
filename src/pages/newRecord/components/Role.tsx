@@ -1,4 +1,6 @@
 import { Button } from 'antd';
+import { useSelector } from 'react-redux';
+import { RootState } from 'src/redux/store';
 import style from './Role.module.scss';
 
 const role = ['Alex', 'Bai', 'C', 'D', 'E', 'F', 'G', 'H', 'I', 'J', 'Kevin', 'Lily'];
@@ -8,6 +10,9 @@ type Props = {
 };
 
 const Role = ({ onClick }: Props) => {
+  const state = useSelector((rootState: RootState) => rootState);
+  console.log(state); // tslint:disable-line
+
   return (
     <div>
       <div className={style.title}>身份發放</div>
