@@ -6,7 +6,7 @@ import Role from './components/Role';
 import Type from './components/Type';
 import style from './NewRecord.module.scss';
 
-const steps = ['type', 'player', 'role', 'night', 'daytime'];
+const steps = ['type', 'player', 'role', 'night', 'blabla', 'daytime'];
 
 const NewRecord = () => {
   const [step, setStep] = useState<string>(steps[0]); // 同時宣告step(值) setStep(function)
@@ -20,8 +20,9 @@ const NewRecord = () => {
       {step === steps[0] && <Type onClick={onSubmit(1)} />}
       {step === steps[1] && <Player onClick={onSubmit(2)} />}
       {step === steps[2] && <Role onClick={onSubmit(3)} />}
-      {step === steps[3] && <Night onClick={onSubmit(4)} />}
-      {step === steps[4] && <Daytime onClick={onSubmit(5)} />}
+      {step === steps[3] && <Night onClick={onSubmit(4)} roleName="witch" />}
+      {step === steps[4] && <Night onClick={onSubmit(5)} roleName="seer" />}
+      {step === steps[5] && <Daytime onClick={onSubmit(6)} />}
     </div>
   );
 };
