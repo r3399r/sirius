@@ -14,6 +14,7 @@ const roleJudge = (roleName: string) => {
   if (roleName === 'guard') return ['守衛守護', '空守'];
   if (roleName === 'hunter') return ['獵人開槍', '壓槍'];
   if (roleName === 'wolf-king') return ['狼王開槍', '壓槍'];
+  throw new Error('unexpected error');
 };
 
 const Night = ({ onClick, roleNameNight }: Props) => {
@@ -22,7 +23,7 @@ const Night = ({ onClick, roleNameNight }: Props) => {
       <div className={style.title}>首夜</div>
       <div className={style.mainFrame}>
         <div>
-          <div className={style.header}>{roleJudge(roleNameNight)?.slice(0, 1)}</div>
+          <div className={style.header}>{roleJudge(roleNameNight)[0]}</div>
           {roleNameNight === 'witch' && (
             <div className={style.functionFrame}>
               <div className={style.function}>解救</div>
@@ -38,7 +39,7 @@ const Night = ({ onClick, roleNameNight }: Props) => {
               </div>
             );
           })}
-          <div className={style.null}>{roleJudge(roleNameNight)?.slice(1)}</div>
+          <div className={style.null}>{roleJudge(roleNameNight)[1]}</div>
         </div>
       </div>
 
