@@ -5,17 +5,26 @@ const daytime = ['1', '2', '3', '4', '5', '6', '7', '8', '9', '10', '11', '12'];
 
 type Props = {
   onClick: () => void;
-  roleName: string;
+  roleNameNight: string;
 };
 
-const Night = ({ onClick, roleName }: Props) => {
+const roleJudge = (roleName: string) => {
+  if (roleName === 'witch') return ['女巫', '無行動'];
+  if (roleName === 'seer') return ['預言家查驗', '無查驗'];
+  if (roleName === 'guard') return ['守衛守護', '空守'];
+  if (roleName === 'hunter') return ['獵人開槍', '壓槍'];
+  if (roleName === 'wolf-king') return ['狼王開槍', '壓槍'];
+  throw new Error('unexpected error');
+};
+
+const Night = ({ onClick, roleNameNight }: Props) => {
   return (
     <div>
       <div className={style.title}>首夜</div>
       <div className={style.mainFrame}>
         <div>
-          <div className={style.header}>{roleName === 'witch' ? '女巫' : '預言家'}</div>
-          {roleName === 'witch' && (
+          <div className={style.header}>{roleJudge(roleNameNight)[0]}</div>
+          {roleNameNight === 'witch' && (
             <div className={style.functionFrame}>
               <div className={style.function}>解救</div>
               <div className={style.function}>撒毒</div>
@@ -30,7 +39,7 @@ const Night = ({ onClick, roleName }: Props) => {
               </div>
             );
           })}
-          <div className={style.null}>{roleName === 'witch' ? '無行動' : '無查驗'}</div>
+          <div className={style.null}>{roleJudge(roleNameNight)[1]}</div>
         </div>
       </div>
 

@@ -6,23 +6,25 @@ import Role from './components/Role';
 import Type from './components/Type';
 import style from './NewRecord.module.scss';
 
-const steps = ['type', 'player', 'role', 'night', 'blabla', 'daytime'];
+const night = ['witch', 'seer', 'guard', 'hunter', 'wolf-king'];
+const steps = ['type', 'player', 'role', night, 'daytime', 'blank'];
 
 const NewRecord = () => {
-  const [step, setStep] = useState<string>(steps[0]); // 同時宣告step(值) setStep(function)
+  const [step, setStep] = useState<string>(steps[0][0]); // 同時宣告step(值) setStep(function)
 
-  const onSubmit = (i: number) => () => {
-    setStep(steps[i]);
+  const onSubmit = (i: number, j: number) => () => {
+    setStep(steps[i][j]);
   };
 
   return (
     <div className={style.self}>
-      {step === steps[0] && <Type onClick={onSubmit(1)} />}
-      {step === steps[1] && <Player onClick={onSubmit(2)} />}
-      {step === steps[2] && <Role onClick={onSubmit(3)} />}
-      {step === steps[3] && <Night onClick={onSubmit(4)} roleName="witch" />}
-      {step === steps[4] && <Night onClick={onSubmit(5)} roleName="seer" />}
-      {step === steps[5] && <Daytime onClick={onSubmit(6)} />}
+      {step === steps[0][0] && <Type onClick={onSubmit(1, 0)} />}
+      {step === steps[1][0] && <Player onClick={onSubmit(2, 0)} />}
+      {step === steps[2][0] && <Role onClick={onSubmit(3, 0)} />}
+      {step === steps[3][0] && <Night onClick={onSubmit(3, 1)} roleNameNight="witch" />}
+      {step === steps[3][1] && <Night onClick={onSubmit(3, 2)} roleNameNight="seer" />}
+      {step === steps[3][2] && <Night onClick={onSubmit(4, 0)} roleNameNight="guard" />}
+      {step === steps[4][0] && <Daytime onClick={onSubmit(5, 0)} />}
     </div>
   );
 };
