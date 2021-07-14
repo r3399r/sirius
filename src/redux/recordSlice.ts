@@ -31,10 +31,13 @@ export const recordSlice = createSlice({
     setPlayer: (state: RecordState, action: PayloadAction<Player[]>) => {
       state.player = action.payload;
     },
+    setRole: (state: RecordState, action: PayloadAction<Player>) => {
+      state.player![Number(action.payload.id) - 1] = action.payload;
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setType, setPlayer } = recordSlice.actions;
+export const { setType, setPlayer, setRole } = recordSlice.actions;
 
 export default recordSlice.reducer;
