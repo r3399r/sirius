@@ -1,8 +1,7 @@
 import { Button } from 'antd';
 import classNames from 'classnames';
 import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Player as PlayerType } from 'src/model/Record';
 import { setRole } from 'src/redux/recordSlice';
 import { RootState } from 'src/redux/store';
@@ -39,13 +38,13 @@ const Role = ({ onClick }: Props) => {
   const state = useSelector((rootState: RootState) => rootState);
   const dispatch = useDispatch();
 
-  const [PresentRole, SetPresentRole] = useState<string>('');
+  const [presentRole, setPresentRole] = useState<string>('');
 
   const onRoleClick = (num: string, playerName: string, playerRole: string) => () => {
     const input: PlayerType = { id: num, name: playerName, role: playerRole };
     if (state.record.player![Number(num) - 1].role === undefined) {
       dispatch(setRole(input));
-      SetPresentRole(role[roleStep]);
+      setPresentRole(role[roleStep]);
     } else alert('玩家角色重複');
   };
 
@@ -56,17 +55,17 @@ const Role = ({ onClick }: Props) => {
       if (roleStep === 6) onClick();
       else {
         setRoleStep(roleStep + 1);
-        SetPresentRole(role[roleStep]);
+        setPresentRole(role[roleStep]);
       }
     else if (count < roleJudgeNum(nameOfRole)!) alert('尚未選擇角色之對應玩家');
     else alert('同一角色選擇過多玩家');
   };
 
   const onReturnClick = () => () => {
-    if (PresentRole === undefined) SetPresentRole('witch');
+    if (presentRole === undefined) setPresentRole('witch');
     const PresentRoleNumList = [];
     for (let i = 0; i < 12; i++)
-      if (state.record.player![i].role === PresentRole) PresentRoleNumList.push(i);
+      if (state.record.player![i].role === presentRole) PresentRoleNumList.push(i);
     for (let j = 0; j < PresentRoleNumList.length; j++) {
       const input: PlayerType = {
         id: String(PresentRoleNumList![j] + 1),
@@ -76,9 +75,9 @@ const Role = ({ onClick }: Props) => {
       dispatch(setRole(input));
     }
     if (roleStep !== 0) {
-      SetPresentRole(role[roleStep - 1]);
+      setPresentRole(role[roleStep - 1]);
       setRoleStep(roleStep - 1);
-    } else SetPresentRole('witch');
+    } else setPresentRole('witch');
   };
 
   return (
@@ -109,7 +108,7 @@ const Role = ({ onClick }: Props) => {
       </div>
 
       <div className={style.btnFrame}>
-        <Button type="text" className={style.btn} onClick={onReturnClick()}>
+        <Button type="text" className={style.btn} onClick={onReturnClick}>
           Back
         </Button>
         <Button type="text" className={style.btn} onClick={onSubmitClick(role[roleStep])}>
