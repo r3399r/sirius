@@ -39,24 +39,47 @@ const Role = ({ onClick }: Props) => {
   const state = useSelector((rootState: RootState) => rootState);
   const dispatch = useDispatch();
 
+  const [PresentRole, SetPresentRole] = useState<string>('');
+
   const onRoleClick = (num: string, playerName: string, playerRole: string) => () => {
     const input: PlayerType = { id: num, name: playerName, role: playerRole };
-    // console.log(state.record.player![Number(num) - 1].role);
-    if (state.record.player![Number(num) - 1].role === undefined) dispatch(setRole(input));
-    else alert('玩家角色重複');
+    if (state.record.player![Number(num) - 1].role === undefined) {
+      dispatch(setRole(input));
+      SetPresentRole(role[roleStep]);
+    } else alert('玩家角色重複');
   };
 
   const onSubmitClick = (nameOfRole: string) => () => {
     let count = 0;
     for (let i = 0; i < 12; i++) if (state.record.player![i].role !== undefined) count++;
     if (count === roleJudgeNum(nameOfRole))
-      if (roleStep === 6) return onClick();
-      else return setRoleStep(roleStep + 1);
+      if (roleStep === 6) onClick();
+      else {
+        setRoleStep(roleStep + 1);
+        SetPresentRole(role[roleStep]);
+      }
     else if (count < roleJudgeNum(nameOfRole)!) alert('尚未選擇角色之對應玩家');
     else alert('同一角色選擇過多玩家');
   };
 
-  // console.log(state.record.player);
+  const onReturnClick = () => () => {
+    if (PresentRole === undefined) SetPresentRole('witch');
+    const PresentRoleNumList = [];
+    for (let i = 0; i < 12; i++)
+      if (state.record.player![i].role === PresentRole) PresentRoleNumList.push(i);
+    for (let j = 0; j < PresentRoleNumList.length; j++) {
+      const input: PlayerType = {
+        id: String(PresentRoleNumList![j] + 1),
+        name: state.record.player![Number(PresentRoleNumList![j])].name,
+        role: undefined,
+      };
+      dispatch(setRole(input));
+    }
+    if (roleStep !== 0) {
+      SetPresentRole(role[roleStep - 1]);
+      setRoleStep(roleStep - 1);
+    } else SetPresentRole('witch');
+  };
 
   return (
     <div>
@@ -85,7 +108,10 @@ const Role = ({ onClick }: Props) => {
         </div>
       </div>
 
-      <div>
+      <div className={style.btnFrame}>
+        <Button type="text" className={style.btn} onClick={onReturnClick()}>
+          Back
+        </Button>
         <Button type="text" className={style.btn} onClick={onSubmitClick(role[roleStep])}>
           Submit
         </Button>

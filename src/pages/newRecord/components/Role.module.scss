@@ -48,14 +48,23 @@
   background-color: #9be4ff;
 }
 
-.btn {
+.btnFrame {
   float: right;
-  font-size: 20px;
-  color: black;
-  border-radius: 12px;
-  padding: 12px 25px;
   margin-top: 40px;
   margin-right: 100px;
+  margin-left: 100px;
+  gap: 25px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.btn {
+  font-size: 20px;
+  color: black;
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 170px;
   height: auto;
   background-color: rgb(255, 230, 132);
   border-color: rgb(255, 230, 132);
