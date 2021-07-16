@@ -42,6 +42,12 @@
   height: 110px;
   cursor: pointer;
   text-align: center;
+  &:active {
+    background-color: #9be4ff;
+  }
+  &:hover {
+    background-color: #9be4ff;
+  }
 }
 
 .clicked {
@@ -56,6 +62,24 @@
   gap: 25px;
   display: flex;
   flex-wrap: wrap;
+}
+
+.backbtn {
+  font-size: 20px;
+  color: black;
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 170px;
+  height: auto;
+  background-color: rgb(255, 230, 132);
+  border-color: rgb(255, 230, 132);
+  &:active {
+    background-color: rgb(255, 230, 132);
+  }
+  &:hover {
+    background-color: rgb(255, 230, 132);
+  }
 }
 
 .btn {

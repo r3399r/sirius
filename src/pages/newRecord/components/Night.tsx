@@ -1,7 +1,7 @@
 import { Button } from 'antd';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
-import { Player as PlayerType } from 'src/model/Record';
+import { Player } from 'src/model/Record';
 import { RootState } from 'src/redux/store';
 import style from './Night.module.scss';
 
@@ -26,7 +26,7 @@ const Night = ({ onClick }: Props) => {
 
   const state = useSelector((rootState: RootState) => rootState);
 
-  const onSubmitClick = () => () => {
+  const onSubmitClick = () => {
     if (nightStep === 4) return onClick;
     else return setNightStep(nightStep + 1);
   };
@@ -45,7 +45,7 @@ const Night = ({ onClick }: Props) => {
           )}
         </div>
         <div className={style.numFrame}>
-          {state.record.player?.map((v: PlayerType, i: number) => {
+          {state.record.player?.map((v: Player, i: number) => {
             return (
               <div className={style.num} key={i}>
                 {v.id} {roleJudge(String(v.role))[0]}
