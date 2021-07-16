@@ -74,8 +74,8 @@ const Role = ({ onClick }: Props) => {
     setNumOrder(numOrder.slice(0, numOrder.length - deleteNumber));
 
     if (roleStep !== 0) {
+      if (presentRole !== role[roleStep]) setRoleStep(roleStep - 1);
       setPresentRole(role[roleStep - 1]);
-      setRoleStep(roleStep - 1);
     } else setPresentRole('witch');
   };
 
