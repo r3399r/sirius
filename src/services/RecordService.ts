@@ -2,8 +2,8 @@ export type Role = {
   roleName: string;
   roleCode: string;
   howMany: number;
-  nightAction: string;
-  nightNull: string;
+  nightAction: string | null;
+  nightNull: string | null;
 };
 
 export const getRoleStep = (type: string): Role[] => {
@@ -17,7 +17,13 @@ export const getRoleStep = (type: string): Role[] => {
       nightAction: '預言家查驗',
       nightNull: '無查驗',
     },
-    { roleName: '守衛', roleCode: 'guard', howMany: 1, nightAction: '守衛守護', nightNull: '空守' },
+    {
+      roleName: '守衛',
+      roleCode: 'guard',
+      howMany: 1,
+      nightAction: '守衛守護',
+      nightNull: '空守',
+    },
     {
       roleName: '獵人',
       roleCode: 'hunter',
@@ -32,8 +38,20 @@ export const getRoleStep = (type: string): Role[] => {
       nightAction: '狼王開槍',
       nightNull: '壓槍',
     },
-    { roleName: '狼', roleCode: 'wolf', howMany: 3, nightAction: '狼刀', nightNull: '空刀' },
-    { roleName: '平民', roleCode: 'villager', howMany: 4, nightAction: '', nightNull: '' },
+    {
+      roleName: '狼',
+      roleCode: 'wolf',
+      howMany: 3,
+      nightAction: '狼刀',
+      nightNull: '空刀',
+    },
+    {
+      roleName: '平民',
+      roleCode: 'villager',
+      howMany: 4,
+      nightAction: null,
+      nightNull: null,
+    },
   ];
   // throw new Error('unexpected game type')
 };

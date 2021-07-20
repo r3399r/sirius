@@ -1,5 +1,6 @@
 import { Button } from 'antd';
 import classNames from 'classnames';
+import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Player } from 'src/model/Record';
@@ -14,16 +15,16 @@ type Props = {
 
 const Role = ({ onClick }: Props) => {
   const state = useSelector((rootState: RootState) => rootState);
-  const [numOrder, setNumOrder] = useState<Number[]>([]);
+  const [numOrder, setNumOrder] = useState<number[]>([]);
   const [roleStep, setRoleStep] = useState<number>(0);
   const [roleData, setRoleData] = useState<RoleType[]>([]);
-  const [whichIsClicked, setWhichIsClicked] = useState<Number[]>([]);
+  const [whichIsClicked, setWhichIsClicked] = useState<number[]>([]);
 
   useEffect(() => {
     setRoleData(getRoleStep(state.record.type!));
   }, [state]);
 
-  const onRoleClick = (num: string, playerRole: string) => () => {
+  const onRoleClick = (num: string) => () => {
     if (!numOrder.includes(Number(num))) {
       if (!whichIsClicked.includes(Number(num)))
         setWhichIsClicked(whichIsClicked.concat(Number(num)));
@@ -39,7 +40,7 @@ const Role = ({ onClick }: Props) => {
       let count = 0;
       for (const element of numOrderConcat) {
         const id = String(element);
-        const name = state.record.player![Number(element) - 1].name;
+        const name = _(state.record.player).find((v: Player) => v.id === id)!.name;
         const role = roleData[roleDataIndex].roleCode;
         const input = { id, name, role };
         playerAndRole = playerAndRole.concat(input);
@@ -49,12 +50,6 @@ const Role = ({ onClick }: Props) => {
           count = 0;
         }
       }
-      playerAndRole.sort((a: Player, b: Player) => {
-        if (Number(a.id) < Number(b.id)) return -1;
-        if (Number(a.id) > Number(b.id)) return 1;
-
-        return 0;
-      });
       dispatch(setPlayer(playerAndRole));
       onClick();
     } else setRoleStep(roleStep + 1);
@@ -81,7 +76,7 @@ const Role = ({ onClick }: Props) => {
     else return true;
   };
 
-  const displayRoleJudge = (i: Number) => {
+  const displayRoleJudge = (i: number) => {
     if (numOrder.includes(i)) {
       let numIndex = numOrder.indexOf(i) + 1;
       let roleDataIndex = 0;
@@ -99,20 +94,18 @@ const Role = ({ onClick }: Props) => {
     <div>
       <div className={style.title}>身份發放</div>
       <div className={style.mainFrame}>
-        <div>
-          <div className={style.header}>{roleData[roleStep].roleName}</div>
-        </div>
+        <div className={style.header}>{roleData[roleStep].roleName}</div>
         <div className={style.numFrame}>
-          {state.record.player?.map((v: Player, i: number) => {
+          {state.record.player?.map((v: Player) => {
             return (
               <Button
-                key={i}
+                key={v.id}
                 className={classNames(style.num, {
                   [style.clicked]:
                     numOrder.includes(Number(v.id)) || whichIsClicked.includes(Number(v.id)),
                 })}
                 type="text"
-                onClick={onRoleClick(v.id, roleData[roleStep].roleCode)}
+                onClick={onRoleClick(v.id)}
                 disabled={numDisabledJudge(Number(v.id))}
               >
                 {v.id} {displayRoleJudge(Number(v.id))}
