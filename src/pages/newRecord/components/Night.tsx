@@ -48,7 +48,7 @@ const Night = ({ onClick }: Props) => {
           {state.record.player?.map((v: Player, i: number) => {
             return (
               <div className={style.num} key={i}>
-                {v.id} {roleJudge(String(v.role))[0]}
+                {v.id} {v.role}
                 <br />
                 {v.name.slice(0, 7)}
               </div>
