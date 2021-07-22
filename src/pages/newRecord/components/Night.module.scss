@@ -42,6 +42,25 @@
   text-align: center;
 }
 
+.functionClick {
+  background-color: rgb(255, 209, 216);
+  font-size: 25px;
+  height: 100px;
+  margin-top: 10px;
+  padding: 30px 50px;
+  border-radius: 40px;
+  cursor: pointer;
+  &:active {
+    background-color: rgb(255, 209, 216);
+  }
+  &:hover {
+    background-color: rgb(255, 209, 216);
+  }
+  &:focus {
+    background-color: rgb(255, 209, 216);
+  }
+}
+
 .numFrame {
   margin-top: 10px;
   margin-left: 100px;
@@ -62,23 +81,95 @@
   text-align: center;
 }
 
+.numClick {
+  padding: 30px 5px;
+  border-radius: 20px;
+  font-size: 20px;
+  background-color: #d3f3ff;
+  width: 110px;
+  height: 110px;
+  cursor: pointer;
+  text-align: center;
+  &:active {
+    background-color: #9be4ff;
+  }
+  &:hover {
+    background-color: #9be4ff;
+  }
+  &:focus {
+    background-color: #9be4ff;
+  }
+}
+
 .null {
   padding: 40px 75px;
   border-radius: 20px;
   font-size: 25px;
   width: 250px;
+  height: 120px;
   background-color: #d3f3ff;
   cursor: pointer;
   text-align: center;
 }
 
-.btn {
+.nullClick {
+  padding: 40px 75px;
+  border-radius: 20px;
+  font-size: 25px;
+  width: 250px;
+  height: 120px;
+  background-color: #9be4ff;
+  cursor: pointer;
+  text-align: center;
+  &:active {
+    background-color: #9be4ff;
+  }
+  &:hover {
+    background-color: #9be4ff;
+  }
+  &:focus {
+    background-color: #9be4ff;
+  }
+}
+
+.btnFrame {
   float: right;
+  margin-top: 40px;
+  margin-right: 100px;
+  margin-left: 100px;
+  gap: 25px;
+  display: flex;
+  flex-wrap: wrap;
+}
+
+.backbtn {
   font-size: 20px;
   color: black;
-  border-radius: 12px;
-  padding: 12px 25px;
-  margin-right: 100px;
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 170px;
+  height: auto;
+  background-color: rgb(255, 230, 132);
+  border-color: rgb(255, 230, 132);
+  &:active {
+    background-color: rgb(255, 230, 132);
+  }
+  &:hover {
+    background-color: rgb(255, 230, 132);
+  }
+  &:focus {
+    background-color: rgb(255, 230, 132);
+  }
+}
+
+.btn {
+  font-size: 20px;
+  color: black;
+  border-radius: 20px;
+  padding-top: 25px;
+  padding-bottom: 25px;
+  width: 170px;
   height: auto;
   background-color: rgb(255, 230, 132);
   border-color: rgb(255, 230, 132);

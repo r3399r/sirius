@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { Player } from 'src/model/Record';
 import { setPlayer } from 'src/redux/recordSlice';
 import { dispatch, RootState } from 'src/redux/store';
-import { getRoleStep, Role as RoleType } from 'src/services/RecordService';
+import { getRoleData, RoleDataType } from 'src/services/RecordService';
 import style from './Role.module.scss';
 
 type Props = {
@@ -17,11 +17,11 @@ const Role = ({ onClick }: Props) => {
   const state = useSelector((rootState: RootState) => rootState);
   const [numOrder, setNumOrder] = useState<number[]>([]);
   const [roleStep, setRoleStep] = useState<number>(0);
-  const [roleData, setRoleData] = useState<RoleType[]>([]);
+  const [roleData, setRoleData] = useState<RoleDataType[]>([]);
   const [whichIsClicked, setWhichIsClicked] = useState<number[]>([]);
 
   useEffect(() => {
-    setRoleData(getRoleStep(state.record.type!));
+    setRoleData(getRoleData(state.record.type!));
   }, [state]);
 
   const onRoleClick = (num: string) => () => {
@@ -42,7 +42,7 @@ const Role = ({ onClick }: Props) => {
         const id = String(element);
         const name = _(state.record.player).find((v: Player) => v.id === id)!.name;
         const role = roleData[roleDataIndex].roleCode;
-        const input = { id, name, role };
+        const input = { id, name, role, alive: true };
         playerAndRole = playerAndRole.concat(input);
         count += 1;
         if (count === roleData[roleDataIndex].howMany) {

@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Player } from 'src/model/Record';
+import { Night, Player } from 'src/model/Record';
 
 // define the type of state
 export type RecordState = {
   type?: string;
   player?: Player[];
+  night?: Night[];
 };
 
 // define the initial value of state
 const initialState: RecordState = {
   type: undefined,
   player: undefined,
+  night: undefined,
 };
 
 /**
@@ -30,6 +32,12 @@ export const recordSlice = createSlice({
     },
     setPlayer: (state: RecordState, action: PayloadAction<Player[]>) => {
       state.player = action.payload;
+      state.player.sort((a: Player, b: Player) => {
+        if (Number(a.id) < Number(b.id)) return -1;
+        if (Number(a.id) > Number(b.id)) return 1;
+
+        return 0;
+      });
     },
   },
 });
