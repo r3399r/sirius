@@ -39,10 +39,14 @@ export const recordSlice = createSlice({
         return 0;
       });
     },
+    setNight: (state: RecordState, action: PayloadAction<Night>) => {
+      if (state.night === undefined) state.night = [action.payload];
+      else state.night = state.night.concat(action.payload);
+    },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setType, setPlayer } = recordSlice.actions;
+export const { setType, setPlayer, setNight } = recordSlice.actions;
 
 export default recordSlice.reducer;

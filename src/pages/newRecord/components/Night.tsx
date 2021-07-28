@@ -1,13 +1,21 @@
 import { Button } from 'antd';
 import classNames from 'classnames';
-// import { stat } from 'fs';
 import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Player } from 'src/model/Record';
-import { setPlayer } from 'src/redux/recordSlice';
+import { setNight, setPlayer } from 'src/redux/recordSlice';
 import { dispatch, RootState } from 'src/redux/store';
-import { getNightData, NightDataType } from 'src/services/RecordService';
+import {
+  getNightData,
+  guardDisabledJudge,
+  hunterDisabledJudge,
+  NightDataType,
+  seerDisabledJudge,
+  witchDisabledJudge,
+  wolfDisabledJudge,
+  wolfKingDisabledJudge,
+} from 'src/services/RecordService';
 import style from './Night.module.scss';
 
 type Props = {
@@ -56,8 +64,43 @@ const Night = ({ onClick }: Props) => {
   };
 
   const onSubmitClick = () => {
+    const inputData = (tmpDieList: number[]) => {
+      let playerInput: Player[] = [];
+      for (let i = 0; i < 12; i++) {
+        const id = String(i + 1);
+        const name = state.record.player![i].name;
+        const role = state.record.player![i].role;
+        const alive = tmpDieList.includes(i + 1) ? false : true;
+        playerInput = playerInput.concat({ id, name, role, alive });
+      }
+      dispatch(setPlayer(playerInput));
+
+      let hunterShootInput: any = '';
+      if (playerInput.find((x: Player) => x.role === 'hunter')?.alive === true)
+        hunterShootInput = 'inactive';
+      else hunterShootInput = hunterShoot;
+
+      let wolfKingShootInput: any = '';
+      if (playerInput.find((x: Player) => x.role === 'wolf-king')?.alive === true)
+        wolfKingShootInput = 'inactive';
+      else wolfKingShootInput = wolfKingShoot;
+
+      const nightInput = {
+        id: state.record.night === undefined ? '1' : String(state.record.night.length + 1),
+        kill,
+        rescue,
+        poison,
+        check,
+        guard,
+        hunterShoot: hunterShootInput,
+        wolfKingShoot: wolfKingShootInput,
+      };
+      dispatch(setNight(nightInput));
+    };
+
     setWhichIsClicked(-1);
     let tmpkilled = -1;
+
     if (nightStep === 3) {
       let tmpDieList: number[] = [];
       if (poison > 0) tmpDieList = tmpDieList.concat(poison);
@@ -79,7 +122,10 @@ const Night = ({ onClick }: Props) => {
         Number(_(state.record.player).find((x: Player) => x.role === 'wolf-king')?.id) === tmpkilled
       )
         return setNightStep(5);
-      else onClick();
+      else {
+        inputData(tmpDieList);
+        onClick();
+      }
     } else if (nightStep === 4)
       if (
         Number(_(state.record.player).find((x: Player) => x.role === 'wolf-king')?.id) !==
@@ -90,7 +136,11 @@ const Night = ({ onClick }: Props) => {
         setDieList(dieList.concat(hunterShoot));
 
         return setNightStep(5);
-      } else onClick();
+      } else {
+        inputData(dieList.concat(hunterShoot));
+        setDieList(dieList.concat(hunterShoot));
+        onClick();
+      }
     else if (nightStep === 5)
       if (
         Number(_(state.record.player).find((x: Player) => x.role === 'hunter')?.id) !== tmpkilled &&
@@ -100,7 +150,11 @@ const Night = ({ onClick }: Props) => {
         setDieList(dieList.concat(wolfKingShoot));
 
         return setNightStep(4);
-      } else onClick();
+      } else {
+        inputData(dieList.concat(wolfKingShoot));
+        setDieList(dieList.concat(wolfKingShoot));
+        onClick();
+      }
     else return setNightStep(nightStep + 1);
   };
 
@@ -154,66 +208,15 @@ const Night = ({ onClick }: Props) => {
   };
 
   const disabledJudge = (ID: string) => {
-    const wolfDisabledJudge = (id: string) => {
-      if (kill >= 0)
-        if (Number(id) === kill) return false;
-        else return true;
-      else return false;
-    };
-    const witchDisabledJudge = (id: string) => {
-      if (_(state.record.player).find((x: Player) => x.id === id)?.role === 'witch') return true;
-      else if (Number(id) === 0)
-        if (rescue === false && poison <= 0) return false;
-        else return true;
-      else if (rescue === true)
-        if (Number(id) === kill) return false;
-        else return true;
-      else if (poison === 13) return false;
-      // 確認開毒
-      else if (poison > 0)
-        if (Number(id) === poison) return false;
-        // 僅有被毒者為可按下
-        else return true;
-      else if (poison === 0) return true;
-      // 無行動
-      else return true;
-    };
-    const seerDisabledJudge = (id: string) => {
-      if (_(state.record.player).find((x: Player) => x.id === id)?.role === 'seer') return true;
-      else if (check >= 0)
-        if (Number(id) === check) return false;
-        else return true;
-      else return false;
-    };
-    const guardDisabledJudge = (id: string) => {
-      if (guard >= 0)
-        if (Number(id) === guard) return false;
-        else return true;
-      else return false;
-    };
-    const hunterDisabledJudge = (id: string) => {
-      if (_(state.record.player).find((x: Player) => x.id === id)?.role === 'hunter') return true;
-      else if (hunterShoot >= 0)
-        if (Number(id) === hunterShoot) return false;
-        else return true;
-      else return false;
-    };
-    const wolfKingDisabledJudge = (id: string) => {
-      if (_(state.record.player).find((x: Player) => x.id === id)?.role === 'wolf-king')
-        return true;
-      else if (wolfKingShoot >= 0)
-        if (Number(id) === wolfKingShoot) return false;
-        else return true;
-      else return false;
-    };
     if (dieList.includes(Number(ID))) return true;
     // if (_(state.record.player).find((x: Player) => x.id === ID)?.alive !== true) return true;
-    if (nightStep === 0) return wolfDisabledJudge(ID);
-    else if (nightStep === 1) return witchDisabledJudge(ID);
-    else if (nightStep === 2) return seerDisabledJudge(ID);
-    else if (nightStep === 3) return guardDisabledJudge(ID);
-    else if (nightStep === 4) return hunterDisabledJudge(ID);
-    else if (nightStep === 5) return wolfKingDisabledJudge(ID);
+    if (nightStep === 0) return wolfDisabledJudge(ID, kill);
+    else if (nightStep === 1)
+      return witchDisabledJudge(ID, rescue, poison, kill, state.record.player!);
+    else if (nightStep === 2) return seerDisabledJudge(ID, check, state.record.player!);
+    else if (nightStep === 3) return guardDisabledJudge(ID, guard);
+    else if (nightStep === 4) return hunterDisabledJudge(ID, hunterShoot, state.record.player!);
+    else if (nightStep === 5) return wolfKingDisabledJudge(ID, wolfKingShoot, state.record.player!);
     else throw new Error('overStep');
   };
 
@@ -242,7 +245,9 @@ const Night = ({ onClick }: Props) => {
 
   return (
     <div>
-      <div className={style.title}>首夜</div>
+      <div className={style.title}>
+        第 {state.record.night === undefined ? 1 : state.record.night.length + 1} 夜
+      </div>
       <div className={style.mainFrame}>
         <div>
           <div className={style.header}>{nightData[nightStep].nightAction}</div>

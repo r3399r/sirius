@@ -6,11 +6,12 @@ export type Player = {
 };
 
 export type Night = {
+  id: string;
   kill?: number;
   rescue: boolean;
   poison?: number;
   check?: number;
   guard?: number;
-  hunterShoot: string;
-  wolfKingShoot: string;
+  hunterShoot: any;
+  wolfKingShoot: any;
 };
