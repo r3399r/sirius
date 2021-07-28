@@ -12,6 +12,6 @@ export type Night = {
   poison?: number;
   check?: number;
   guard?: number;
-  hunterShoot: any;
-  wolfKingShoot: any;
+  hunterShoot: number;
+  wolfKingShoot: number;
 };
