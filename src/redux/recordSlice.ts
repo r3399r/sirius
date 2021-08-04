@@ -11,8 +11,8 @@ export type RecordState = {
 // define the initial value of state
 const initialState: RecordState = {
   type: undefined,
-  player: undefined,
-  night: undefined,
+  player: [],
+  night: [],
 };
 
 /**
@@ -40,8 +40,7 @@ export const recordSlice = createSlice({
       });
     },
     setNight: (state: RecordState, action: PayloadAction<Night>) => {
-      if (state.night === undefined) state.night = [action.payload];
-      else state.night = state.night.concat(action.payload);
+      state.night = state.night!.concat(action.payload);
     },
   },
 });

@@ -11,8 +11,6 @@ type Props = {
 
 const Daytime = ({ onClick }: Props) => {
   const state = useSelector((rootState: RootState) => rootState);
-  // console.log(state.record.player);
-  // console.log(state.record.night);
 
   return (
     <div>
