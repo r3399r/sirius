@@ -8,13 +8,13 @@ import { setNight, setPlayer } from 'src/redux/recordSlice';
 import { dispatch, RootState } from 'src/redux/store';
 import {
   getNightData,
-  guardDisabledJudge,
-  hunterDisabledJudge,
+  isGuardDisabled,
+  isHunterDisabled,
+  isSeerDisabled,
+  isWitchDisabled,
+  isWolfDisabled,
+  isWolfKingDisabled,
   NightDataType,
-  seerDisabledJudge,
-  witchDisabledJudge,
-  wolfDisabledJudge,
-  wolfKingDisabledJudge,
 } from 'src/services/RecordService';
 import style from './Night.module.scss';
 
@@ -215,16 +215,16 @@ const Night = ({ onClick }: Props) => {
     if (dieList.includes(Number(id))) return true;
     if (Number(id) > 0 && _(state.record.player).find((x: Player) => x.id === id)?.alive !== true)
       return true;
-    if (nightData[nightStep].roleCode === 'wolf') return wolfDisabledJudge(id, kill);
+    if (nightData[nightStep].roleCode === 'wolf') return isWolfDisabled(id, kill);
     else if (nightData[nightStep].roleCode === 'witch')
-      return witchDisabledJudge(id, rescue, poison, kill, state.record.player);
+      return isWitchDisabled(id, rescue, poison, kill, state.record.player);
     else if (nightData[nightStep].roleCode === 'seer')
-      return seerDisabledJudge(id, check, state.record.player);
-    else if (nightData[nightStep].roleCode === 'guard') return guardDisabledJudge(id, guard);
+      return isSeerDisabled(id, check, state.record.player);
+    else if (nightData[nightStep].roleCode === 'guard') return isGuardDisabled(id, guard);
     else if (nightData[nightStep].roleCode === 'hunter')
-      return hunterDisabledJudge(id, hunterShoot, state.record.player);
+      return isHunterDisabled(id, hunterShoot, state.record.player);
     else if (nightData[nightStep].roleCode === 'wolf-king')
-      return wolfKingDisabledJudge(id, wolfKingShoot, state.record.player);
+      return isWolfKingDisabled(id, wolfKingShoot, state.record.player);
     else throw new Error('OverStep');
   };
 

@@ -50,13 +50,13 @@ export const getNightData = (type: string): NightDataType[] => {
   ];
 };
 
-export const wolfDisabledJudge = (id: string, kill: number) => {
+export const isWolfDisabled = (id: string, kill: number) => {
   if (kill >= 0)
     if (Number(id) === kill) return false;
     else return true;
   else return false;
 };
-export const witchDisabledJudge = (
+export const isWitchDisabled = (
   id: string,
   rescue: boolean,
   poison: number,
@@ -80,27 +80,27 @@ export const witchDisabledJudge = (
   // 無行動
   else return true;
 };
-export const seerDisabledJudge = (id: string, check: number, player: Player[]) => {
+export const isSeerDisabled = (id: string, check: number, player: Player[]) => {
   if (player.find((x: Player) => x.id === id)?.role === 'seer') return true;
   else if (check >= 0)
     if (Number(id) === check) return false;
     else return true;
   else return false;
 };
-export const guardDisabledJudge = (id: string, guard: number) => {
+export const isGuardDisabled = (id: string, guard: number) => {
   if (guard >= 0)
     if (Number(id) === guard) return false;
     else return true;
   else return false;
 };
-export const hunterDisabledJudge = (id: string, hunterShoot: number, player: Player[]) => {
+export const isHunterDisabled = (id: string, hunterShoot: number, player: Player[]) => {
   if (player.find((x: Player) => x.id === id)?.role === 'hunter') return true;
   else if (hunterShoot >= 0)
     if (Number(id) === hunterShoot) return false;
     else return true;
   else return false;
 };
-export const wolfKingDisabledJudge = (id: string, wolfKingShoot: number, player: Player[]) => {
+export const isWolfKingDisabled = (id: string, wolfKingShoot: number, player: Player[]) => {
   if (player.find((x: Player) => x.id === id)?.role === 'wolf-king') return true;
   else if (wolfKingShoot >= 0)
     if (Number(id) === wolfKingShoot) return false;
