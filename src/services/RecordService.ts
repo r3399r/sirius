@@ -7,7 +7,6 @@ export type RoleDataType = {
 };
 
 export type NightDataType = {
-  order: number;
   roleName: string;
   roleCode: string;
   nightAction: string | null;
@@ -31,25 +30,23 @@ export const getRoleData = (type: string): RoleDataType[] => {
 export const getNightData = (type: string): NightDataType[] => {
   // if (type === '某版型')
   return [
-    { order: 0, roleName: '狼', roleCode: 'wolf', nightAction: '狼刀', nightNull: '空刀' },
-    { order: 1, roleName: '女巫', roleCode: 'witch', nightAction: '女巫', nightNull: '無行動' },
+    { roleName: '狼', roleCode: 'wolf', nightAction: '狼刀', nightNull: '空刀' },
+    { roleName: '女巫', roleCode: 'witch', nightAction: '女巫', nightNull: '無行動' },
     {
-      order: 2,
       roleName: '預言家',
       roleCode: 'seer',
       nightAction: '預言家查驗',
       nightNull: '無查驗',
     },
-    { order: 3, roleName: '守衛', roleCode: 'guard', nightAction: '守衛守護', nightNull: '空守' },
-    { order: 4, roleName: '獵人', roleCode: 'hunter', nightAction: '獵人開槍', nightNull: '壓槍' },
+    { roleName: '守衛', roleCode: 'guard', nightAction: '守衛守護', nightNull: '空守' },
+    { roleName: '獵人', roleCode: 'hunter', nightAction: '獵人開槍', nightNull: '壓槍' },
     {
-      order: 5,
       roleName: '狼王',
       roleCode: 'wolf-king',
       nightAction: '狼王開槍',
       nightNull: '壓槍',
     },
-    { order: 6, roleName: '平民', roleCode: 'villager', nightAction: null, nightNull: null },
+    { roleName: '平民', roleCode: 'villager', nightAction: null, nightNull: null },
   ];
 };
 

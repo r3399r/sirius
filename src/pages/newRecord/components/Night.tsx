@@ -63,21 +63,12 @@ const Night = ({ onClick }: Props) => {
     setWhichIsClicked(13);
   };
   const savePlayer = (tmpDieList: number[]) => {
-    let playerInput: Player[] = state.record.player!;
+    const playerInput: Player[] = _.cloneDeep(state.record.player);
     for (const element of tmpDieList) {
-      const tmpPlayer = playerInput!.find((x: Player) => x.id === String(element));
-      const modifiedPlayer: Player = {
-        id: tmpPlayer!.id,
-        name: tmpPlayer!.name,
-        role: tmpPlayer?.role,
-        alive: false,
-      };
-      playerInput = playerInput.concat(modifiedPlayer);
-      playerInput = playerInput.filter((item: Player) => {
-        return item !== tmpPlayer;
-      });
+      const idx = playerInput.findIndex((x: Player) => x.id === String(element));
+      playerInput[idx].alive = false;
     }
-    dispatch(setPlayer(playerInput!));
+    dispatch(setPlayer(playerInput));
 
     return playerInput;
   };
@@ -91,7 +82,7 @@ const Night = ({ onClick }: Props) => {
       wolfKingShootInput = 13;
     else wolfKingShootInput = wolfKingShoot;
     const nightInput = {
-      id: String(state.record.night!.length + 1),
+      id: String(state.record.night.length + 1),
       kill,
       rescue,
       poison,
@@ -122,11 +113,11 @@ const Night = ({ onClick }: Props) => {
       }
       setDieList(tmpDieList);
       if (Number(_(state.record.player).find((x: Player) => x.role === 'hunter')?.id) === tmpkilled)
-        return setNightStep(4);
+        return setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'hunter'));
       else if (
         Number(_(state.record.player).find((x: Player) => x.role === 'wolf-king')?.id) === tmpkilled
       )
-        return setNightStep(5);
+        return setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'wolf-king'));
       else {
         const playerInput: Player[] = savePlayer(tmpDieList);
         saveNight(playerInput);
@@ -141,7 +132,7 @@ const Night = ({ onClick }: Props) => {
       ) {
         setDieList(dieList.concat(hunterShoot));
 
-        return setNightStep(5);
+        return setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'wolf-king'));
       } else {
         const playerInput = savePlayer(dieList.concat(hunterShoot));
         saveNight(playerInput);
@@ -156,7 +147,7 @@ const Night = ({ onClick }: Props) => {
       ) {
         setDieList(dieList.concat(wolfKingShoot));
 
-        return setNightStep(4);
+        return setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'hunter'));
       } else {
         const playerInput = savePlayer(dieList.concat(wolfKingShoot));
         saveNight(playerInput);
@@ -188,11 +179,11 @@ const Night = ({ onClick }: Props) => {
         ) {
           setWolfKingShoot(-1);
           setDieList(dieList.slice(0, -1));
-          setNightStep(nightData.find((x: NightDataType) => x.roleCode === 'wolf-king')!.order);
+          setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'wolf-king'));
         } else {
           setGuard(-1);
           setDieList([]);
-          setNightStep(nightData.find((x: NightDataType) => x.roleCode === 'guard')!.order);
+          setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'guard'));
         }
       if (nightData[nightStep].roleCode === 'wolf-king')
         if (
@@ -202,11 +193,11 @@ const Night = ({ onClick }: Props) => {
         ) {
           setHunterShoot(-1);
           setDieList(dieList.slice(0, -1));
-          setNightStep(nightData.find((x: NightDataType) => x.roleCode === 'hunter')!.order);
+          setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'hunter'));
         } else {
           setGuard(-1);
           setDieList([]);
-          setNightStep(nightData.find((x: NightDataType) => x.roleCode === 'guard')!.order);
+          setNightStep(nightData.findIndex((x: NightDataType) => x.roleCode === 'guard'));
         }
     } else if (nightData[nightStep].roleCode === 'wolf') setKill(-1);
     if (nightData[nightStep].roleCode === 'witch') {
@@ -220,37 +211,37 @@ const Night = ({ onClick }: Props) => {
     setWhichIsClicked(-1);
   };
 
-  const disabledJudge = (id: string) => {
+  const isRoleDisabled = (id: string) => {
     if (dieList.includes(Number(id))) return true;
     if (Number(id) > 0 && _(state.record.player).find((x: Player) => x.id === id)?.alive !== true)
       return true;
     if (nightData[nightStep].roleCode === 'wolf') return wolfDisabledJudge(id, kill);
     else if (nightData[nightStep].roleCode === 'witch')
-      return witchDisabledJudge(id, rescue, poison, kill, state.record.player!);
+      return witchDisabledJudge(id, rescue, poison, kill, state.record.player);
     else if (nightData[nightStep].roleCode === 'seer')
-      return seerDisabledJudge(id, check, state.record.player!);
+      return seerDisabledJudge(id, check, state.record.player);
     else if (nightData[nightStep].roleCode === 'guard') return guardDisabledJudge(id, guard);
     else if (nightData[nightStep].roleCode === 'hunter')
-      return hunterDisabledJudge(id, hunterShoot, state.record.player!);
+      return hunterDisabledJudge(id, hunterShoot, state.record.player);
     else if (nightData[nightStep].roleCode === 'wolf-king')
-      return wolfKingDisabledJudge(id, wolfKingShoot, state.record.player!);
+      return wolfKingDisabledJudge(id, wolfKingShoot, state.record.player);
     else throw new Error('OverStep');
   };
 
-  const IsRescueDisabled =
+  const isRescueDisabled =
     kill === Number(_(state.record.player).find((x: Player) => x.role === 'witch')?.id) ||
     poison >= 0 ||
     kill <= 0;
 
   const isPoisonDisabled = rescue === true || poison === 0;
 
-  const IsSubmitDisabled = !(whichIsClicked >= 0 && whichIsClicked <= 12);
+  const isSubmitDisabled = !(whichIsClicked >= 0 && whichIsClicked <= 12);
 
   if (nightData.length === 0) return <div>loading...</div>;
 
   return (
     <div>
-      <div className={style.title}>第 {state.record.night!.length + 1} 夜</div>
+      <div className={style.title}>第 {state.record.night.length + 1} 夜</div>
       <div className={style.mainFrame}>
         <div>
           <div className={style.header}>{nightData[nightStep].nightAction}</div>
@@ -262,7 +253,7 @@ const Night = ({ onClick }: Props) => {
                 })}
                 type="text"
                 onClick={onRescueClick}
-                disabled={IsRescueDisabled}
+                disabled={isRescueDisabled}
               >
                 解救
               </Button>
@@ -289,7 +280,7 @@ const Night = ({ onClick }: Props) => {
                 key={v.id}
                 type="text"
                 onClick={onRoleClick(v.id)}
-                disabled={disabledJudge(v.id)}
+                disabled={isRoleDisabled(v.id)}
               >
                 {v.id} {nightData.find((x: NightDataType) => x.roleCode === v.role)?.roleName}
                 <br />
@@ -303,7 +294,7 @@ const Night = ({ onClick }: Props) => {
             })}
             type="text"
             onClick={onRoleClick('0')}
-            disabled={disabledJudge('0')}
+            disabled={isRoleDisabled('0')}
           >
             {nightData[nightStep].nightNull}
           </Button>
@@ -318,7 +309,7 @@ const Night = ({ onClick }: Props) => {
           type="text"
           className={style.btn}
           onClick={onSubmitClick}
-          disabled={IsSubmitDisabled}
+          disabled={isSubmitDisabled}
         >
           Submit
         </Button>

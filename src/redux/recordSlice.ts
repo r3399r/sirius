@@ -4,8 +4,8 @@ import { Night, Player } from 'src/model/Record';
 // define the type of state
 export type RecordState = {
   type?: string;
-  player?: Player[];
-  night?: Night[];
+  player: Player[];
+  night: Night[];
 };
 
 // define the initial value of state
@@ -40,7 +40,7 @@ export const recordSlice = createSlice({
       });
     },
     setNight: (state: RecordState, action: PayloadAction<Night>) => {
-      state.night = state.night!.concat(action.payload);
+      state.night = state.night.concat(action.payload);
     },
   },
 });
