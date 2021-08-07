@@ -1,16 +1,18 @@
 import { createSlice, PayloadAction } from '@reduxjs/toolkit';
-import { Player } from 'src/model/Record';
+import { Night, Player } from 'src/model/Record';
 
 // define the type of state
 export type RecordState = {
   type?: string;
-  player?: Player[];
+  player: Player[];
+  night: Night[];
 };
 
 // define the initial value of state
 const initialState: RecordState = {
   type: undefined,
-  player: undefined,
+  player: [],
+  night: [],
 };
 
 /**
@@ -30,11 +32,20 @@ export const recordSlice = createSlice({
     },
     setPlayer: (state: RecordState, action: PayloadAction<Player[]>) => {
       state.player = action.payload;
+      state.player.sort((a: Player, b: Player) => {
+        if (Number(a.id) < Number(b.id)) return -1;
+        if (Number(a.id) > Number(b.id)) return 1;
+
+        return 0;
+      });
+    },
+    setNight: (state: RecordState, action: PayloadAction<Night>) => {
+      state.night = state.night.concat(action.payload);
     },
   },
 });
 
 // Action creators are generated for each case reducer function
-export const { setType, setPlayer } = recordSlice.actions;
+export const { setType, setPlayer, setNight } = recordSlice.actions;
 
 export default recordSlice.reducer;
