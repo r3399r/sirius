@@ -4,9 +4,29 @@
   margin-top: 20px;
 }
 
+.mainFrame {
+  width: 100%;
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+}
+
+.header {
+  background-color: rgb(255, 209, 216);
+  font-size: 25px;
+  height: 190px;
+  width: 200px;
+  margin-top: 100px;
+  margin-left: 60px;
+  padding: 80px 10px;
+  border-radius: 40px;
+  cursor: pointer;
+  text-align: center;
+}
+
 .numFrame {
-  margin-top: 50px;
-  margin-left: 50px;
+  margin-top: 10px;
+  margin-left: 100px;
   width: 550px;
   gap: 25px;
   display: flex;
@@ -35,6 +55,37 @@
 
 .clicked {
   background-color: #9be4ff;
+}
+
+.null {
+  padding: 40px 20px;
+  border-radius: 20px;
+  font-size: 25px;
+  width: 250px;
+  height: 120px;
+  background-color: #d3f3ff;
+  cursor: pointer;
+  text-align: center;
+}
+
+.nullClick {
+  padding: 40px 20px;
+  border-radius: 20px;
+  font-size: 25px;
+  width: 250px;
+  height: 120px;
+  background-color: #9be4ff;
+  cursor: pointer;
+  text-align: center;
+  &:active {
+    background-color: #9be4ff;
+  }
+  &:hover {
+    background-color: #9be4ff;
+  }
+  &:focus {
+    background-color: #9be4ff;
+  }
 }
 
 .btnFrame {

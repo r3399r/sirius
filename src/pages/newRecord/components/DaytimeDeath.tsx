@@ -1,5 +1,4 @@
 import { Button } from 'antd';
-import classNames from 'classnames';
 import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { DaytimeDeath as DaytimeDeathType } from 'src/model/Record';
@@ -63,6 +62,7 @@ const DaytimeDeath = ({ onClick }: Props) => {
 
   return (
     <div>
+      <div className={style.title}>第 {state.record.night.length} 天白天死亡狀態</div>
       <div className={style.mainFrame}>
         <Button
           type="text"
