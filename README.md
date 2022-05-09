@@ -36,6 +36,7 @@ Before you commit your code change, you may run `npm run fix` first to make the 
 npm run commit
 npm run push
 ```
+If the code did not pass the linter, the commit process should fail.
 
 ### Create PR
 After the change is push to your branch, then we need to create a PR (pull request) on Github. When the review is finished, we can merge into `dev` branch. And the CI/CD process would be triggered, and we can check the latest app on TEST environemnt.
