@@ -1,0 +1,15 @@
+@import 'src/style/variable';
+
+.self {
+  margin: 24px 15px 0 15px;
+  @media (min-width: $sm) {
+    margin: 60px 40px 0 40px;
+  }
+  @media (min-width: $md) {
+    width: 960px;
+    margin: 60px auto 0 auto;
+  }
+  @media (min-width: $lg) {
+    width: 1170px;
+  }
+}

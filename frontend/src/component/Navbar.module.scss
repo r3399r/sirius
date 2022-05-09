@@ -1,0 +1,14 @@
+.self {
+  background-color: var(--navbar-background);
+  height: 30px;
+  padding: 10px;
+
+  display: flex;
+  gap: 15px;
+  align-items: center;
+  justify-content: space-between;
+
+  > div {
+    cursor: pointer;
+  }
+}

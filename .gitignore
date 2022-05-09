@@ -1,11 +1,1 @@
-# dependencies
-/node_modules
-
-# test
-/coverage
-
-# build
-/build
-
-# OS file
-**/.DS_Store 
+node_modules
