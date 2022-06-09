@@ -5,9 +5,3 @@ html[data-theme='light'] {
   background-color: $white;
   --navbar-background: #{$yellow};
 }
-
-html[data-theme='dark'] {
-  color: $pale-grey;
-  background-color: $dark-grey;
-  --navbar-background: #{$dark-yellow};
-}

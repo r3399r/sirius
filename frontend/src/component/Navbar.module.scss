@@ -1,14 +1,17 @@
 .self {
   background-color: var(--navbar-background);
-  height: 30px;
+  height: 40px;
+  box-sizing: border-box;
   padding: 10px;
 
   display: flex;
-  gap: 15px;
   align-items: center;
-  justify-content: space-between;
+}
+.title {
+  flex: 1;
+  text-align: center;
+}
 
-  > div {
-    cursor: pointer;
-  }
+.clickable {
+  cursor: pointer;
 }

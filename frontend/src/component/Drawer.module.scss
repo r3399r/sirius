@@ -1,0 +1,13 @@
+.self {
+  box-sizing: border-box;
+  width: 170px;
+  padding: 25px;
+
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+
+  > div {
+    cursor: pointer;
+  }
+}
