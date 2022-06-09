@@ -1,19 +1,25 @@
 import React from 'react';
 import { createRoot } from 'react-dom/client';
+import { Provider } from 'react-redux';
 import { BrowserRouter } from 'react-router-dom';
 import App from './App';
 import ThemeProvider from './context/ThemeContext';
+import { configStore } from './redux/store';
 import reportWebVitals from './reportWebVitals';
 import './style/index.scss';
+
+const store = configStore();
 
 const root = createRoot(document.getElementById('root') as Element);
 
 root.render(
   <React.StrictMode>
     <ThemeProvider>
-      <BrowserRouter>
-        <App />
-      </BrowserRouter>
+      <Provider store={store}>
+        <BrowserRouter>
+          <App />
+        </BrowserRouter>
+      </Provider>
     </ThemeProvider>
   </React.StrictMode>,
 );
