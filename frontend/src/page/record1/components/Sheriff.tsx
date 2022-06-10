@@ -305,23 +305,21 @@ const Sheriff = ({ onClick }: Props) => {
       <div className={style.mainFrame}>
         <div className={style.header}>{displayheader()}</div>
         <div className={style.numFrame}>
-          {state.record.player?.map((v: Player) => {
-            return (
-              <Button
-                key={v.id}
-                className={classNames(style.num, {
-                  [style.clicked]: whichIsClicked.includes(Number(v.id)),
-                })}
-                type="text"
-                onClick={onNumClick(Number(v.id))}
-                disabled={isNumDisabled(Number(v.id))}
-              >
-                {v.id} {roleData.find((x: RoleDataType) => x.roleCode === v.role)?.roleName}
-                <br />
-                {v.name.slice(0, 5)}
-              </Button>
-            );
-          })}
+          {state.record.player?.map((v: Player) => (
+            <Button
+              key={v.id}
+              className={classNames(style.num, {
+                [style.clicked]: whichIsClicked.includes(Number(v.id)),
+              })}
+              type="text"
+              onClick={onNumClick(Number(v.id))}
+              disabled={isNumDisabled(Number(v.id))}
+            >
+              {v.id} {roleData.find((x: RoleDataType) => x.roleCode === v.role)?.roleName}
+              <br />
+              {v.name.slice(0, 5)}
+            </Button>
+          ))}
           {stageStep !== 0 && (
             <Button
               className={classNames(style.null, {

@@ -13,9 +13,9 @@ export type NightDataType = {
   nightNull: string | null;
 };
 
-export const getRoleData = (type: string): RoleDataType[] => {
+export const getRoleData = (type: string): RoleDataType[] =>
   // if (type === '某版型')
-  return [
+  [
     { roleName: '女巫', roleCode: 'witch', howMany: 1 },
     { roleName: '預言家', roleCode: 'seer', howMany: 1 },
     { roleName: '守衛', roleCode: 'guard', howMany: 1 },
@@ -24,12 +24,11 @@ export const getRoleData = (type: string): RoleDataType[] => {
     { roleName: '狼', roleCode: 'wolf', howMany: 3 },
     { roleName: '平民', roleCode: 'villager', howMany: 4 },
   ];
-  // throw new Error('unexpected game type')
-};
+// throw new Error('unexpected game type')
 
-export const getNightData = (type: string): NightDataType[] => {
+export const getNightData = (type: string): NightDataType[] =>
   // if (type === '某版型')
-  return [
+  [
     { roleName: '狼', roleCode: 'wolf', nightAction: '狼刀', nightNull: '空刀' },
     { roleName: '女巫', roleCode: 'witch', nightAction: '女巫', nightNull: '無行動' },
     {
@@ -48,7 +47,6 @@ export const getNightData = (type: string): NightDataType[] => {
     },
     { roleName: '平民', roleCode: 'villager', nightAction: null, nightNull: null },
   ];
-};
 
 export const isWolfDisabled = (id: string, kill: number) => {
   if (kill >= 0)

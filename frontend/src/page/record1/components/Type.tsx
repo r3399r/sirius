@@ -36,18 +36,16 @@ const Type = ({ onClick }: Props) => {
     <div>
       <div className={style.title}>選擇版型</div>
       <div className={style.panel}>
-        {types.map((v: string, i: number) => {
-          return (
-            <div
-              key={i}
-              className={classNames(style.type, { [style.clicked]: i === whichIsClicked })}
-              role="button"
-              onClick={onTypeClick(i)}
-            >
-              {v}
-            </div>
-          );
-        })}
+        {types.map((v: string, i: number) => (
+          <div
+            key={i}
+            className={classNames(style.type, { [style.clicked]: i === whichIsClicked })}
+            role="button"
+            onClick={onTypeClick(i)}
+          >
+            {v}
+          </div>
+        ))}
       </div>
       <div>
         <Button type="text" className={style.btn} onClick={onSubmit} disabled={whichIsClicked < 0}>

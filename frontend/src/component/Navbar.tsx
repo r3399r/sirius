@@ -12,7 +12,7 @@ const Navbar = () => {
           選單
         </div>
         <div className={style.title}>
-          <b>狼人殺小工具</b>
+          <b>狼人殺工具</b>
         </div>
       </div>
       <Drawer open={open} onClose={() => setOpen(false)} />

@@ -55,23 +55,21 @@ const GiveUp = ({ onClick }: Props) => {
     <div>
       <div className={style.title}>第 {state.record.night.length} 天白天自爆玩家</div>
       <div className={style.numFrame}>
-        {state.record.player?.map((v: Player) => {
-          return (
-            <Button
-              key={v.id}
-              className={classNames(style.num, {
-                [style.clicked]: whichIsClicked === Number(v.id),
-              })}
-              type="text"
-              onClick={onNumClick(Number(v.id))}
-              disabled={numDisabledJudge(v.id)}
-            >
-              {v.id} {roleData.find((x: RoleDataType) => x.roleCode === v.role)?.roleName}
-              <br />
-              {v.name.slice(0, 7)}
-            </Button>
-          );
-        })}
+        {state.record.player?.map((v: Player) => (
+          <Button
+            key={v.id}
+            className={classNames(style.num, {
+              [style.clicked]: whichIsClicked === Number(v.id),
+            })}
+            type="text"
+            onClick={onNumClick(Number(v.id))}
+            disabled={numDisabledJudge(v.id)}
+          >
+            {v.id} {roleData.find((x: RoleDataType) => x.roleCode === v.role)?.roleName}
+            <br />
+            {v.name.slice(0, 7)}
+          </Button>
+        ))}
       </div>
       <div className={style.btnFrame}>
         <Button type="text" className={style.backbtn} onClick={onReturnClick}>

@@ -96,24 +96,22 @@ const Role = ({ onClick }: Props) => {
       <div className={style.mainFrame}>
         <div className={style.header}>{roleData[roleStep].roleName}</div>
         <div className={style.numFrame}>
-          {state.record.player?.map((v: Player) => {
-            return (
-              <Button
-                key={v.id}
-                className={classNames(style.num, {
-                  [style.clicked]:
-                    numOrder.includes(Number(v.id)) || whichIsClicked.includes(Number(v.id)),
-                })}
-                type="text"
-                onClick={onRoleClick(v.id)}
-                disabled={numDisabledJudge(Number(v.id))}
-              >
-                {v.id} {displayRoleJudge(Number(v.id))}
-                <br />
-                {v.name.slice(0, 5)}
-              </Button>
-            );
-          })}
+          {state.record.player?.map((v: Player) => (
+            <Button
+              key={v.id}
+              className={classNames(style.num, {
+                [style.clicked]:
+                  numOrder.includes(Number(v.id)) || whichIsClicked.includes(Number(v.id)),
+              })}
+              type="text"
+              onClick={onRoleClick(v.id)}
+              disabled={numDisabledJudge(Number(v.id))}
+            >
+              {v.id} {displayRoleJudge(Number(v.id))}
+              <br />
+              {v.name.slice(0, 5)}
+            </Button>
+          ))}
         </div>
       </div>
 

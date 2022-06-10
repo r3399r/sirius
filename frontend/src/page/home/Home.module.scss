@@ -1,5 +1,7 @@
 .self {
   height: calc(100vh - 40px);
+  box-sizing: border-box;
+  padding: 30px;
   display: flex;
   align-items: center;
   justify-content: center;

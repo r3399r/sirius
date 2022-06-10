@@ -1,4 +1,4 @@
-import { Button, Input } from 'antd';
+import { Button } from 'antd';
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
 import { Player as PlayerType } from 'src/model/Record';
@@ -29,9 +29,7 @@ const Player = ({ onClick }: Props) => {
   const dispatch = useDispatch();
 
   const onSubmit = (data: any) => {
-    const input: PlayerType[] = Object.keys(data).map((id: string) => {
-      return { id, name: data[id] };
-    });
+    const input: PlayerType[] = Object.keys(data).map((id: string) => ({ id, name: data[id] }));
     dispatch(setPlayer(input));
     onClick();
   };
@@ -40,14 +38,12 @@ const Player = ({ onClick }: Props) => {
     <form onSubmit={handleSubmit(onSubmit)}>
       <div className={style.title}>玩家名稱</div>
       <div className={style.parent}>
-        {players.map((v: string, i: number) => {
-          return (
-            <div className={style.child} key={i}>
-              <div className={style.text}>{v}</div>
-              <Input {...register(`${i + 1}`, { required: true })} autoComplete="off" />
-            </div>
-          );
-        })}
+        {players.map((v: string, i: number) => (
+          <div className={style.child} key={i}>
+            <div className={style.text}>{v}</div>
+            <input {...register(`${i + 1}`, { required: true })} autoComplete="off" />
+          </div>
+        ))}
       </div>
       <div>
         <Button type="text" htmlType="submit" className={style.btn}>

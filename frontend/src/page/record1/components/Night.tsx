@@ -74,10 +74,10 @@ const Night = ({ onClick }: Props) => {
   };
 
   const saveNight = (playerInput: Player[]) => {
-    let hunterShootInput: number = -1;
+    let hunterShootInput = -1;
     if (playerInput.find((x: Player) => x.role === 'hunter')?.alive === true) hunterShootInput = 13;
     else hunterShootInput = hunterShoot;
-    let wolfKingShootInput: number = -1;
+    let wolfKingShootInput = -1;
     if (playerInput.find((x: Player) => x.role === 'wolf-king')?.alive === true)
       wolfKingShootInput = 13;
     else wolfKingShootInput = wolfKingShoot;
@@ -271,23 +271,21 @@ const Night = ({ onClick }: Props) => {
           )}
         </div>
         <div className={style.numFrame}>
-          {state.record.player?.map((v: Player) => {
-            return (
-              <Button
-                className={classNames(style.num, {
-                  [style.numClick]: whichIsClicked === Number(v.id),
-                })}
-                key={v.id}
-                type="text"
-                onClick={onRoleClick(v.id)}
-                disabled={isRoleDisabled(v.id)}
-              >
-                {v.id} {nightData.find((x: NightDataType) => x.roleCode === v.role)?.roleName}
-                <br />
-                {v.name.slice(0, 7)}
-              </Button>
-            );
-          })}
+          {state.record.player?.map((v: Player) => (
+            <Button
+              className={classNames(style.num, {
+                [style.numClick]: whichIsClicked === Number(v.id),
+              })}
+              key={v.id}
+              type="text"
+              onClick={onRoleClick(v.id)}
+              disabled={isRoleDisabled(v.id)}
+            >
+              {v.id} {nightData.find((x: NightDataType) => x.roleCode === v.role)?.roleName}
+              <br />
+              {v.name.slice(0, 7)}
+            </Button>
+          ))}
           <Button
             className={classNames(style.null, {
               [style.nullClick]: whichIsClicked === 0,
