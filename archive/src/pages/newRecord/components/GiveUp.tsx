@@ -4,6 +4,7 @@ import _ from 'lodash';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Player } from 'src/model/Record';
+import { setPlayer } from 'src/redux/recordSlice';
 import { dispatch, RootState } from 'src/redux/store';
 import { getRoleData, RoleDataType } from 'src/services/RecordService';
 import style from './GiveUp.module.scss';
@@ -30,6 +31,10 @@ const GiveUp = ({ onClick }: Props) => {
   };
 
   const onSubmitClick = () => {
+    const playerInput: Player[] = _.cloneDeep(state.record.player);
+    const idx = playerInput.findIndex((x: Player) => x.id === String(whichIsClicked));
+    playerInput[idx].alive = false;
+    dispatch(setPlayer(playerInput));
     onClick();
   };
 
